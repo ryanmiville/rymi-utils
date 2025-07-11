@@ -21,6 +21,12 @@
       "title": "URL Decode",
       "description": "URL decode a string",
       "mode": "no-view"
+    },
+    {
+      "name": "copy-glue-parameters",
+      "title": "Copy Glue Parameters",
+      "description": "Convert newline-delimited key/value pairs to JSON format",
+      "mode": "no-view"
     }
   ],
   "dependencies": {
