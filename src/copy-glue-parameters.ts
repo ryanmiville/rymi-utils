@@ -1,11 +1,11 @@
-import { showToast, Toast } from "@raycast/api";
-import { contents, update } from "./clipboard";
+import { Clipboard, getSelectedText, showHUD, showToast, Toast } from "@raycast/api";
 
 export default async () => {
   try {
-    const clipboard = await contents();
-    const json = convertToGlueParametersJson(clipboard);
-    await update(json);
+    const text = await getSelectedText();
+    const json = convertToGlueParametersJson(text);
+    await Clipboard.copy(json);
+    await showHUD("Copied to clipboard");
   } catch (e) {
     if (typeof e === "string") {
       await showToast({
