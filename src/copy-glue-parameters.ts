@@ -1,9 +1,9 @@
-import { Clipboard, getSelectedText, showHUD, showToast, Toast } from "@raycast/api";
+import { Clipboard, showHUD, showToast, Toast } from "@raycast/api";
 
 export default async () => {
   try {
-    const text = await getSelectedText();
-    const json = convertToGlueParametersJson(text);
+    const text = await Clipboard.readText();
+    const json = convertToGlueParametersJson(text!);
     await Clipboard.copy(json);
     await showHUD("Copied to clipboard");
   } catch (e) {
@@ -29,7 +29,7 @@ function convertToGlueParametersJson(input: string): string {
   }
 
   if (lines.length % 2 !== 0) {
-    throw "Invalid format: parameters must be in key-value pairs";
+    throw `Invalid format: parameters must be in key-value pairs\n\n${input}`;
   }
 
   const params: Record<string, string> = {};
